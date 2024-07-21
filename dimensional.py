@@ -28,11 +28,3 @@ print(t3)
 # 4D tensor: 컬러이미지(샘플, 높이, 너비, 컬러 채널) -> 흑백은 컬러채널 제외 3D 가능
 # 5D tensor: 비디오(샘플, 높이, 너비, 컬러 채널, 프레임)
 
-import math
-
-a = torch.rand(1, 2) * 2 - 1
-print(a)
-print(torch.abs(a))
-print(torch.ceil(a))
-print(torch.floor(a))
-print(torch.clamp(a, -0.5, 0.5))
