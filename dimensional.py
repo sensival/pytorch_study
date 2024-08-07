@@ -28,3 +28,33 @@ print(t3)
 # 4D tensor: 컬러이미지(샘플, 높이, 너비, 컬러 채널) -> 흑백은 컬러채널 제외 3D 가능
 # 5D tensor: 비디오(샘플, 높이, 너비, 컬러 채널, 프레임)
 
+# 크기 모양 변경
+x = torch.randn(4,5)
+print(x)
+y = x.view(20)
+print(y)
+z = x.view(5, -1) # 행은 5개 나머지는 알아서
+print(z)
+
+# squeeze 차원 축소
+tensor = torch.rand(1, 3, 3)
+print(tensor)
+print(tensor.shape)
+t = tensor.squeeze()
+print(t)
+print(t.shape)
+
+# unsqueeze 차원 감소
+tensor = torch.rand(3, 3)
+print(tensor)
+print(tensor.shape)
+t = tensor.unsqueeze(dim=0)
+print(t)
+print(t.shape) # 1 3 3
+
+tensor = torch.rand(3, 3)
+print(tensor)
+print(tensor.shape)
+t = tensor.unsqueeze(dim=2)
+print(t)
+print(t.shape) # 3 3 1
