@@ -5,7 +5,7 @@ import os
 import re
 import glob
 import cv2
-
+from ultralytics import YOLO 
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -106,13 +106,16 @@ val_dataset = CustomDataset(val_df['path'].values, val_label_vec, test_transform
 val_loader = DataLoader(val_dataset, batch_size=CFG['BATCH_SIZE'], shuffle=False, num_workers=0)
 
 
-
+###################################################################
 class BaseModel(nn.Module):
-    def __init__(self, gene_size=CFG['label_size']):
+    def __init__(self, gene_size=CFG['label_size'], model_path='yolo11n-cls.pt'):
         super(BaseModel, self).__init__()
-        self.backbone = models.resnet50(pretrained=True)
-        self.regressor = nn.Linear(1000, gene_size)
+        self.backbone = YOLO(model_path).model  # YOLO11n 분류 모델 로드
+        self.backbone.model[-1] = nn.Identity()  # 최종 분류 레이어 제거
         
+        # 회귀 레이어 추가 (유전체 발현 예측용)
+        self.regressor = nn.Linear(1000, gene_size)  # 1280은 특징 추출기의 출력 크기
+
     def forward(self, x):
         x = self.backbone(x)
         x = self.regressor(x)
