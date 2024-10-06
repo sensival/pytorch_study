@@ -11,6 +11,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
+from transform_unet import UNet
 
 import albumentations as A
 from albumentations.pytorch.transforms import ToTensorV2
@@ -105,8 +106,7 @@ train_loader = DataLoader(train_dataset, batch_size = CFG['BATCH_SIZE'], shuffle
 val_dataset = CustomDataset(val_df['path'].values, val_label_vec, test_transform)
 val_loader = DataLoader(val_dataset, batch_size=CFG['BATCH_SIZE'], shuffle=False, num_workers=0)
 
-
-###################################################################
+'''
 class BaseModel(nn.Module):
     def __init__(self, gene_size=CFG['label_size'], model_path='yolo11n-cls.pt'):
         super(BaseModel, self).__init__()
@@ -120,6 +120,8 @@ class BaseModel(nn.Module):
         x = self.backbone(x)
         x = self.regressor(x)
         return x
+
+'''
 
 def train(model, optimizer, train_loader, val_loader, scheduler, device):
     model.to(device)
@@ -180,7 +182,7 @@ def validation(model, criterion, val_loader, device):
 
 
 
-model = BaseModel()
+model = UNet(gene_size=CFG['label_size'])
 model.eval()
 optimizer = torch.optim.Adam(params = model.parameters(), lr = CFG["LEARNING_RATE"])
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=2, threshold_mode='abs', min_lr=1e-8, verbose=True)
