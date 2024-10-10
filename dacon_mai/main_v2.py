@@ -200,3 +200,32 @@ scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
 
 # 모델 학습
 infer_model = train(model, optimizer, train_loader, val_loader, scheduler, device)
+
+
+test = pd.read_csv('./test.csv')
+test_dataset = CustomDataset(test['path'].values, None, test_transform)
+test_loader = DataLoader(test_dataset, batch_size=CFG['BATCH_SIZE'], shuffle=False, num_workers=0)
+
+
+def inference(model, test_loader, device):
+    model.eval()
+    preds = []
+    with torch.no_grad():
+        for imgs in tqdm(test_loader):
+            imgs = imgs.to(device).float()
+            pred = model(imgs)
+            
+            preds.append(pred.detach().cpu())
+    
+    preds = torch.cat(preds).numpy()
+
+    return preds
+
+
+preds = inference(infer_model, test_loader, device)
+
+
+
+submit = pd.read_csv('./sample_submission.csv')
+submit.iloc[:, 1:] = np.array(preds).astype(np.float32)
+submit.to_csv('./baseline_submit.csv', index=False)
