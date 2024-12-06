@@ -117,7 +117,7 @@ val_loader = DataLoader(val_dataset, batch_size=CFG['BATCH_SIZE'], shuffle=False
 class BaseModel(nn.Module):
     def __init__(self, gene_size=CFG['label_size']):
         super(BaseModel, self).__init__()
-        self.backbone = models.resnet152(pretrained=True)
+        self.backbone = models.resnet34(pretrained=True)
         self.regressor = nn.Linear(1000, gene_size)
         
     def forward(self, x):
