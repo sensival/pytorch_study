@@ -20,6 +20,7 @@ x = torch.rand(2, 2)
 print(x)
 print(x.max(dim=0)) # 열이 같은 것 중 선택
 print(x.max(dim=1)) # 행이 같은 것 중 선택
+# max와 min은 dim 인자를 줄 경우 argmax, argmin도 리턴 argmax(최대값을 가진 인덱스), argmin(최소값을 가진 인덱스)
 
 
 
@@ -34,16 +35,19 @@ result = torch.empty(2,4)
 torch.add(x, y, out=result)
 print(result)
 
-# 더하고 덮어쓰기 in-place
-y.add_(x)
+# 더하고 덮어쓰기 in-place _ 언더바 붙이기
+y.add_(x) #y에 더한 값이 덮어 씌워짐
+y.sub_(x)
+y.mul_(x)
+y.div_(x)
 
-# 내적
+# 내적(dot product)
 print(x)
 print(y)
 print(torch.matmul(x, y))
 z = torch.mm(x, y)
 print(z)
-print(torch.svd(z))
+print(torch.svd(z)) #행렬분해
 # U: 입력 행렬과 같은 크기의 직교 행렬 Q ^TQ=QQ^T=I 인 Q
 # S: 단일값을 포함한 1차원 텐서(대각행렬의 가운데 값들 나열)
 # V: A의 전치된 직교 행렬
