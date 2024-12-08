@@ -64,6 +64,14 @@ print(x[1,1])
 print(x[:,0]) # 1, 3
 print(x[:,1]) # 2, 4
 
+# 크기나 모양변경
+x= torch.randn(4,5)
+print(x)
+y=x.view(20)
+print(y)
+z=x.view(5,-1) # -1은 나머지는 너가 알아서 정해줘~ -> 5x4
+print(z)
+
 # 스칼라 값 출력
 x = torch.randn(1) # 2면 item 오류
 print(x)
@@ -71,30 +79,4 @@ print(x.item())
 print(x.dtype)
 
 
-# 텐서 간 결합 stack
-x = torch.FloatTensor([1,4])
-print(x)
-y = torch.FloatTensor([2,5])
-print(y)
-z = torch.FloatTensor([3,6])
-print(z)
-print(torch.stack([x,y,z]))
-
-# 텐서 간 결합 cat ---> dim이 존재해야함
-a = torch.randn(1,3,3)
-print(a)
-b = torch.randn(1,3,3)
-print(b)
-c= torch.cat((a,b), dim = 1)
-print(c)
-print(c.size()) # dim = 0 -> 2,3,3, dim = 1 -> 1,6,3
-
-
-# 텐서 나누기 chunk 53:58
-tensor = torch.rand(3,6)
-print(tensor)
-t1, t2, t3 = torch.chunk(tensor, 3, dim = 1)
-print(t1)
-print(t2)
-print(t2)
 
