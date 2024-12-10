@@ -36,15 +36,15 @@ print(y)
 z = x.view(5, -1) # 행은 5개 나머지는 알아서
 print(z)
 
-# squeeze 차원 축소
+# squeeze 차원 축소: 차원이 1인 차원을 제거해준다. 
 tensor = torch.rand(1, 3, 3)
 print(tensor)
 print(tensor.shape)
 t = tensor.squeeze()
 print(t)
-print(t.shape)
+print(t.shape) # 3, 3
 
-# unsqueeze 차원 감소
+# unsqueeze 차원 증가: 1인 차원을 생성하는 함수이다. 그래서 어느 차원에 1인 차원을 생성할 지 꼭 지정해주어야한다.
 tensor = torch.rand(3, 3)
 print(tensor)
 print(tensor.shape)
