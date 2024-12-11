@@ -23,7 +23,15 @@ print(c.size()) # dim = 0 -> 2,3,3, dim = 1 -> 1,6,3
 # 텐서 나누기 chunk 53:58
 tensor = torch.rand(3,6)
 print(tensor)
-t1, t2, t3 = torch.chunk(tensor, 3, dim = 1)
+t1, t2, t3 = torch.chunk(tensor, 3, dim = 1) # 3개로 나눌거야
+print(t2)
+print(t2)
+
+# spilt: chunk와 동일하지만 조금 다름
+tensor =torch.rand(3,6)
+t1, t2 = torch.split(tensor, 3, dim=1) # 열이 3개로 나눠줘
+print(t1)
+print(tensor)
 print(t1)
 print(t2)
-print(t2)
+
