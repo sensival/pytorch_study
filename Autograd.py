@@ -24,4 +24,4 @@ print(a.requires_grad)
 
 b = (a * a).sum() 
 print(b)
-print(b.grad_fn) # sum() 연산을 했다는 것을 기억
+print(b.grad_fn) # =<SumBackward0> ->sum() 연산을 했다는 것을 기억
