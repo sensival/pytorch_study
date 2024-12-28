@@ -10,3 +10,15 @@ print(a.data)
 print(a.grad) # 계산한게 없으니 none
 print(a.grad_fn) # 계산한게 없으니 none
 
+b = a + 2
+print(b)
+
+c = b ** 2
+print(c)
+
+out =  c.sum()
+print(out)
+
+out.backward()
+
+# 결과값 확인
