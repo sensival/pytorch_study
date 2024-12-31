@@ -22,3 +22,25 @@ print(out)
 out.backward()
 
 # 결과값 확인
+print("------------a------------")
+print(a.data) # 1,1,1,1
+print(a.grad) # 6,6,6,6
+print(a.grad_fn) # a에 대해 직접 계산한게 없으니 none
+
+
+print("------------b------------")
+print(b.data) 
+print(b.grad) 
+print(b.grad_fn) 
+
+
+print("------------c------------")
+print(c.data) 
+print(c.grad) 
+print(c.grad_fn) 
+
+
+print("------------out------------")
+print(out.data) 
+print(out.grad) 
+print(out.grad_fn) 
