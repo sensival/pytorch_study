@@ -8,3 +8,11 @@ from torchvision import datasets
 
 # DataLoader의 인자로 들어갈 transform을 미리 정의할 수 있고 Compose 를 통해 리스트안에 순서대로 전처리 진행
 # ToTensor()를 하는 이유는 torchvision이 PIL Image 형태로만 입력을 받기 때문에 데이터처리를 위해서 tensor 형으로 변환
+mnist_transform = transforms.Compose([transforms.ToTensor(),
+                                      transforms.Normalize(mean=(0.5,), std=(1.0))])
+trainset = datasets.MNIST(root='./mnist/',
+                          train=True, download=True,
+                          transform=mnist_transform)
+testset = datasets.MNIST(root='./mnist/',
+                          train=False, download=True,
+                          transform=mnist_transform)
