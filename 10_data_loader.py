@@ -18,7 +18,7 @@ testset = datasets.MNIST(root='./mnist/',
                           transform=mnist_transform)
 
 # DataLoader 는 전체 데이터를 보관했다가 실제 모델학습을 할 때 batch_size 크기만큼 데이터를 가져옴
-train_loader =  DataLoader(trainset, batch_size=8, shuffle=True, num_workers=0)
+train_loader =  DataLoader(trainset, batch_size=8, shuffle=True, num_workers=0) # num_workers=0은 싱글 프로세싱
 test_loader =  DataLoader(testset, batch_size=8, shuffle=True, num_workers=0)
 
 dataiter = iter(train_loader)
