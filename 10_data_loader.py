@@ -23,4 +23,4 @@ test_loader =  DataLoader(testset, batch_size=8, shuffle=True, num_workers=0)
 
 dataiter = iter(train_loader)
 images, labels = next(dataiter)  # 여기 수정!
-print(images.shape, labels.shape)
+print(images.shape, labels.shape) # torch.Size([8, 1, 28, 28]) torch.Size([8])
