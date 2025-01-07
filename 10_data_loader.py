@@ -11,8 +11,16 @@ from torchvision import datasets
 mnist_transform = transforms.Compose([transforms.ToTensor(),
                                       transforms.Normalize(mean=(0.5,), std=(1.0))])
 trainset = datasets.MNIST(root='./mnist/',
-                          train=True, download=True,
+                          train=True, download=False,
                           transform=mnist_transform)
 testset = datasets.MNIST(root='./mnist/',
-                          train=False, download=True,
+                          train=False, download=False,
                           transform=mnist_transform)
+
+# DataLoader 는 전체 데이터를 보관했다가 실제 모델학습을 할 때 batch_size 크기만큼 데이터를 가져옴
+train_loader =  DataLoader(trainset, batch_size=8, shuffle=True, num_workers=0)
+test_loader =  DataLoader(testset, batch_size=8, shuffle=True, num_workers=0)
+
+dataiter = iter(train_loader)
+images, labels = next(dataiter)  # 여기 수정!
+print(images.shape, labels.shape)
