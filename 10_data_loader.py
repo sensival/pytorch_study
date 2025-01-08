@@ -1,3 +1,5 @@
+import torch
+
 # dataloader와 dataset을 통해 batch_size, train 여부, transform 등을 인자로 넣어 데이터를 어떻게 load 할 것인지 정해줄 수 있음 
 from torch.utils.data import Dataset, DataLoader
 
@@ -24,3 +26,6 @@ test_loader =  DataLoader(testset, batch_size=8, shuffle=True, num_workers=0)
 dataiter = iter(train_loader)
 images, labels = next(dataiter)  # 여기 수정!
 print(images.shape, labels.shape) # torch.Size([8, 1, 28, 28]) torch.Size([8])
+
+torch_image = torch.squeeze(images[0])
+print(torch_image.shape)
