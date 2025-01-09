@@ -29,3 +29,16 @@ print(images.shape, labels.shape) # torch.Size([8, 1, 28, 28]) torch.Size([8])
 
 torch_image = torch.squeeze(images[0])
 print(torch_image.shape)
+
+
+import matplotlib.pyplot as plt
+figiure = plt.figure(figsize=(12, 6))
+cols, rows = 4, 2
+for i in range(1, cols * rows + 1):
+    sample_idx =  torch.randint(len(trainset), size=(1,)).item()
+    img, label = trainset[sample_idx]
+    figiure.add_subplot(rows, cols, i)
+    plt.title(label)
+    plt.axis("off")
+    plt.imshow(img.squeeze(), cmap='gray')
+plt.show()
