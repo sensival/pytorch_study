@@ -43,3 +43,6 @@ print(m)
 
 output = m(input)
 print(output.size())
+# torch.Size([20, 16, 50, 100])
+# Conv2d(16, 33, kernel_size=(3, 5), stride=(2, 1), padding=(4, 2), dilation=(3, 1))
+# torch.Size([20, 33, 26, 100])
